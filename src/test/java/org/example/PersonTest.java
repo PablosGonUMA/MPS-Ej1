@@ -74,7 +74,8 @@ class PersonTest {
     void averageOfEmptyListIs00(){
         Person person = new Person("Pablo", 20, "masculino");
         List<Person> emptyList = new ArrayList<>();
-        assertEquals(person.avergeAgePerGender(emptyList), new double[]{0, 0});
+        assertEquals(person.avergeAgePerGender(emptyList)[0], 0.0);
+        assertEquals(person.avergeAgePerGender(emptyList)[1], 0.0);
     }
 
     @Test
@@ -82,7 +83,8 @@ class PersonTest {
         Person person = new Person("Pablo", 20, "masculino");
         List<Person> list = new ArrayList<>();
         list.add(person);
-        assertEquals(person.avergeAgePerGender(list), new double[]{person.age(), 0});
+        assertEquals(person.avergeAgePerGender(list)[0], person.age());
+        assertEquals(person.avergeAgePerGender(list)[1], 0.0);
     }
 
     @Test
@@ -90,7 +92,8 @@ class PersonTest {
         Person person = new Person("Pablo", 20, "femenino");
         List<Person> list = new ArrayList<>();
         list.add(person);
-        assertEquals(person.avergeAgePerGender(list), new double[]{0, person.age()});
+        assertEquals(person.avergeAgePerGender(list)[0], 0.0);
+        assertEquals(person.avergeAgePerGender(list)[1], person.age());
     }
 
     @Test
@@ -100,7 +103,8 @@ class PersonTest {
         List<Person> list = new ArrayList<>();
         list.add(man);
         list.add(woman);
-        assertEquals(man.avergeAgePerGender(list), new double[]{man.age(), woman.age()});
+        assertEquals(man.avergeAgePerGender(list)[0], man.age());
+        assertEquals(man.avergeAgePerGender(list)[1], woman.age());
     }
 
     @Test
@@ -114,6 +118,6 @@ class PersonTest {
         list.add(woman1);
         list.add(man2);
         list.add(woman2);
-        assertEquals(man1.avergeAgePerGender(list), new double[]{(man1.age()+man2.age())/2, (woman1.age() + woman2.age())/2});
-    }
+        assertEquals(man1.avergeAgePerGender(list)[0], (man1.age()+man2.age())/2);
+        assertEquals(man1.avergeAgePerGender(list)[1], (woman1.age()+woman2.age())/2);    }
 }

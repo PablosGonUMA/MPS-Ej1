@@ -16,6 +16,18 @@ public class Person {
      */
     public Person(String name, int age, String gender){
 
+        if(age < 0){
+            throw new NegativeAgeException("Edad negativa");
+        }
+
+        if(gender != "masculino" && gender != "femenino"){
+            throw new NonValidGenderException("Género debe ser masculino o femenino");
+        }
+
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+
     }
 
     public String name(){
@@ -35,8 +47,25 @@ public class Person {
      * @param persons
      * @return
      */
-    public double[] avergeAgePerGender(List<Person> persons){
-        return null;
+    public double[] avergeAgePerGender(List<Person> persons)
+    {
+        double menMean = 0, womenMean = 0;
+        int numberOfMen = 0, numberOfWomen = 0;
+        double[] result;
+
+        if(persons == null || persons.isEmpty()){
+            result = new double[]{0.0, 0.0};
+        } else if (persons.size() == 1 && persons.get(0).gender() == "masculino"){
+            result = new double[]{persons.get(0).age(), 0.0};
+        } else if (persons.size() == 1 && persons.get(0).gender() == "femenino"){
+            result = new double[]{0.0, persons.get(0).age()};
+        } else {
+            result = null;
+        }
+
+
+
+        return result;
     }
 
 }
