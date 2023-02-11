@@ -49,7 +49,7 @@ public class Person {
      */
     public double[] avergeAgePerGender(List<Person> persons)
     {
-        double menMean = 0, womenMean = 0;
+        double menMean = 0.0, womenMean = 0.0;
         int numberOfMen = 0, numberOfWomen = 0;
         double[] result;
 
@@ -60,7 +60,27 @@ public class Person {
         } else if (persons.size() == 1 && persons.get(0).gender() == "femenino"){
             result = new double[]{0.0, persons.get(0).age()};
         } else {
-            result = null;
+
+            for (Person p: persons) {
+                if(p.gender() == "masculino"){
+                    menMean += p.age();
+                    numberOfMen++;
+                } else {
+                    womenMean += p.age();
+                    numberOfWomen++;
+                }
+            }
+
+            if(numberOfMen != 0){
+                menMean = menMean/numberOfMen;
+            }
+
+            if(numberOfWomen != 0){
+                womenMean = womenMean/numberOfWomen;
+            }
+
+            result = new double[]{menMean, womenMean};
+
         }
 
 
