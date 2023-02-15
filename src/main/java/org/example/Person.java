@@ -20,8 +20,12 @@ public class Person {
             throw new NegativeAgeException("Edad negativa");
         }
 
-        if(gender != "masculino" && gender != "femenino"){
+        if(gender == null || gender != "masculino" && gender != "femenino"){
             throw new NonValidGenderException("Género debe ser masculino o femenino");
+        }
+
+        if(name == null){
+            throw new RuntimeException("El nombre no puede ser nulo");
         }
 
         this.name = name;

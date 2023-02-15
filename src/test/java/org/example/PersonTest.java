@@ -23,10 +23,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * (10) - Si al método averageAgePerGender se le pasa una lista de varios hombres el resultado será {x, 0}, siendo x la edad media de los hombres
  * (11) - Si al método averageAgePerGender se le pasa una lista de varias mujeres el resultado será {0, x}, siendo x la edad media de las mujeres
  * (12) - Si al método averageAgePerGender se le pasa una lista con más elementos el resultado será {x, y}, siendo x la edad media de los hombres e y la edad media de las mujeres
+ *
+ * (13) - Si se crea un objeto tipo Person con un nombre null, se lanzará una RuntimeException.
+ * (14) - Si se crea un objeto tipo person con género null, se lanzará una NonValidGenderException.
+ * (15) - Si al método averaageAgePerGender se le pasa una lista vacía el resultado será [0, 0]
  */
 class PersonTest {
 
     Person person;
+
+
 
     @Test
     void personNameMatchesWithConstructorParameter(){
@@ -79,6 +85,8 @@ class PersonTest {
         assertEquals(person.avergeAgePerGender(emptyList)[0], 0.0);
         assertEquals(person.avergeAgePerGender(emptyList)[1], 0.0);
     }
+
+
 
     @Test
     void averageOfOneManIsMansAge0(){
@@ -145,4 +153,23 @@ class PersonTest {
         assertEquals(man1.avergeAgePerGender(list)[0], (man1.age()+man2.age())/2);
         assertEquals(man1.avergeAgePerGender(list)[1], (woman1.age()+woman2.age())/2);
     }
+
+    @Test
+    void nullNameThrowsRuntimeException(){
+        assertThrows(RuntimeException.class, () -> person = new Person(null, 20, "masculino"));
+    }
+
+    @Test
+    void nullGenderThrowsException(){
+        assertThrows(NonValidGenderException.class, () -> person = new Person("Pablo", 20, null));
+    }
+
+    @Test
+    void averageOfNullListIs00(){
+        Person person = new Person("Pablo", 20, "masculino");
+        assertEquals(person.avergeAgePerGender(null)[0], 0.0);
+        assertEquals(person.avergeAgePerGender(null)[1], 0.0);
+    }
 }
+
+
